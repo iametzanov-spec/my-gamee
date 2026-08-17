@@ -1,0 +1,204 @@
+fillRect(
+        30,
+        0,
+        340,
+        600
+    );
+
+
+    /* линии */
+
+    carCtx.strokeStyle =
+        "#ffffff";
+
+    carCtx.lineWidth = 5;
+
+
+    roadLines.forEach(
+        y => {
+
+            carCtx.beginPath();
+
+            carCtx.moveTo(
+                165,
+                y
+            );
+
+            carCtx.lineTo(
+                165,
+                y + 55
+            );
+
+            carCtx.stroke();
+
+
+            carCtx.beginPath();
+
+            carCtx.moveTo(
+                235,
+                y
+            );
+
+            carCtx.lineTo(
+                235,
+                y + 55
+            );
+
+            carCtx.stroke();
+
+        }
+    );
+
+
+    /* игрок */
+
+    drawCar(
+        playerCar.x,
+        playerCar.y,
+        "#00eaff"
+    );
+
+
+    /* враги */
+
+    enemyCars.forEach(
+        car => {
+
+            drawCar(
+                car.x,
+                car.y,
+                "#ff1744"
+            );
+
+        }
+    );
+
+}
+
+
+function drawCar(x, y, color) {
+
+    /* корпус */
+
+    carCtx.fillStyle = color;
+
+    carCtx.beginPath();
+
+    carCtx.roundRect(
+        x,
+        y,
+        50,
+        75,
+        12
+    );
+
+    carCtx.fill();
+
+
+    /* стекло */
+
+    carCtx.fillStyle =
+        "#151525";
+
+    carCtx.fillRect(
+        x + 8,
+        y + 12,
+        34,
+        20
+    );
+
+
+    /* фары */
+
+    carCtx.fillStyle =
+        "#fff700";
+
+    carCtx.fillRect(
+        x + 6,
+        y + 4,
+        10,
+        7
+    );
+
+    carCtx.fillRect(
+        x + 34,
+        y + 4,
+        10,
+        7
+    );
+
+
+    /* колёса */
+
+    carCtx.fillStyle =
+        "#050505";
+
+    carCtx.fillRect(
+        x - 5,
+        y + 15,
+        7,
+        20
+    );
+
+    carCtx.fillRect(
+        x + 48,
+        y + 15,
+        7,
+        20
+    );
+
+    carCtx.fillRect(
+        x - 5,
+        y + 48,
+        7,
+        20
+    );
+
+    carCtx.fillRect(
+        x + 48,
+        y + 48,
+        7,
+        20
+    );
+
+}
+
+
+function carGameOver() {
+
+    carRunning = false;
+
+    cancelAnimationFrame(
+        carAnimation
+    );
+
+
+    setTimeout(
+        () => {
+
+            alert(
+                "💥 АВАРИЯ!\n\nТвой счёт: " +
+                Math.floor(carScoreValue)
+            );
+
+        },
+        100
+    );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+restartSnake();
+
+restartTTT();
+
+restartCars();
+
+</script>
+
+</body>
+</html>
